@@ -1,12 +1,13 @@
 {
   "name": "semantic-ui-calendar-react",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "date/time picker built from semantic-ui elements",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npx cross-env TS_NODE_COMPILER_OPTIONS=\"{\"\"allowJs\"\":true}\" npx mocha -r ts-node/register ./test/setup.js ./test/**/*.{js,jsx,ts,tsx}",
+    "test": "npx cross-env TS_NODE_COMPILER_OPTIONS=\"{\\\"allowJs\\\":true}\" npx mocha -r ts-node/register ./test/setup.js ./test/**/*.{js,jsx,ts,tsx}",
     "start": "npx webpack-dev-server",
     "prebuild": "npm run test && npm run lint && npx rimraf dist/*",
+    "prepare": "npm run build",
     "build": "npx tsc --declaration",
     "publish-npm": "npm run test && npm run build && npm publish",
     "build:example": "npm run test && npm run lint && npx webpack --production",
@@ -28,10 +29,6 @@
     "src",
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arfedulov/semantic-ui-calendar-react.git"
-  },
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.6.0",
