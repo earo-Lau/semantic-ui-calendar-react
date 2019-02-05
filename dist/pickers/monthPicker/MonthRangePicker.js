@@ -64,7 +64,7 @@ var MonthRangePicker = /** @class */ (function (_super) {
             _this.setState(function (_a) {
                 var date = _a.date;
                 var nextDate = date.clone();
-                nextDate.add(1, 'month');
+                nextDate.add(1, 'year');
                 return { date: nextDate };
             }, callback);
         };
@@ -72,7 +72,7 @@ var MonthRangePicker = /** @class */ (function (_super) {
             _this.setState(function (_a) {
                 var date = _a.date;
                 var prevDate = date.clone();
-                prevDate.subtract(1, 'month');
+                prevDate.subtract(1, 'year');
                 return { date: prevDate };
             }, callback);
         };
@@ -99,13 +99,27 @@ var MonthRangePicker = /** @class */ (function (_super) {
         return _.filter(_.range(0, MonthPicker_1.MONTHS_IN_YEAR), function (d) { return !_.includes(_this.getDisabledPositions(), d); });
     };
     MonthRangePicker.prototype.getActiveCellsPositions = function () {
-        // TODO: get cell positions
         /*
-          Return starting and ending positions of dates range that should be displayed as active
+          Return starting and ending positions of month range that should be displayed as active
           { start: number, end: number }
-          (position in array returned by `this.buildCalendarValues`).
         */
-        return { start: undefined, end: undefined };
+        var _a = this.props, start = _a.start, end = _a.end;
+        var currentYear = this.state.date.year();
+        var result = {
+            start: undefined,
+            end: undefined,
+        };
+        if (start && end) {
+            if (currentYear < start.year() || currentYear > end.year()) {
+                return result;
+            }
+            result.start = currentYear === start.year() ? start.month() : 0;
+            result.end = currentYear === end.year() ? end.month() : MonthPicker_1.MONTHS_IN_YEAR - 1;
+        }
+        if (start && !end) {
+            result.start = currentYear === start.year() ? start.month() : undefined;
+        }
+        return result;
     };
     MonthRangePicker.prototype.getDisabledPositions = function () {
         /*

@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 import * as React from 'react';
 import { RangeIndexes } from '../../views/BaseCalendarView';
 import { BasePickerOnChangeData, BasePickerProps, MinMaxValueProps, ProvideHeadingValue, RangeSelectionPicker } from '../BasePicker';
-export interface DatesRangePickerProps extends BasePickerProps, MinMaxValueProps {
+interface DatesRangePickerProps extends BasePickerProps, MinMaxValueProps {
     /** Moment date formatting string. */
     dateFormat: string;
     /** Start of currently selected dates range. */

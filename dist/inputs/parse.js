@@ -86,6 +86,8 @@ function cleanDate(inputString, dateFormat) {
  * @param {string} inputSeparator Separator for split inputString
  */
 function parseDatesRange(inputString, dateFormat, inputSeparator) {
+    if (inputString === void 0) { inputString = ''; }
+    if (dateFormat === void 0) { dateFormat = ''; }
     if (inputSeparator === void 0) { inputSeparator = ' - '; }
     var dates = inputString.split(inputSeparator)
         .map(function (date) { return cleanDate(date, dateFormat); });

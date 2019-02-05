@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import * as moment from 'moment';
 export declare const TIME_FORMAT: {
     24: string;
@@ -17,7 +16,7 @@ declare type ParseArrayOrValueData = ParseValueData | ParseValueData[];
  * Return array of moments. Returned value contains only valid moments.
  * Return undefined if none of the input values are valid.
  */
-export declare function parseArrayOrValue(data: ParseArrayOrValueData, dateFormat: string): Moment[];
+export declare function parseArrayOrValue(data: ParseArrayOrValueData, dateFormat: string): moment.Moment[];
 interface DateParams {
     year?: number;
     month?: number;
@@ -42,8 +41,8 @@ declare type DateValue = InitialDate;
 export declare function chooseValue(value: string, initialDate?: InitialDate): DateValue;
 export declare function dateValueToString(value: DateValue, dateFormat: string): string;
 interface Range {
-    start?: Moment;
-    end?: Moment;
+    start?: moment.Moment;
+    end?: moment.Moment;
 }
 /**
  * Extract start and end dates from input string.
@@ -52,5 +51,5 @@ interface Range {
  * @param {string} dateFormat Moment formatting string
  * @param {string} inputSeparator Separator for split inputString
  */
-export declare function parseDatesRange(inputString: string, dateFormat: string, inputSeparator?: string): Range;
+export declare function parseDatesRange(inputString?: string, dateFormat?: string, inputSeparator?: string): Range;
 export {};
