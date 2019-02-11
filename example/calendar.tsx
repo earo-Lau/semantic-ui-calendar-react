@@ -149,6 +149,7 @@ class DateTimeForm extends React.Component<any, any> {
           popupPosition='bottom right'
           name='dateTime'
           closable
+          minDate={new Date()}
           clearable={clearable}
           value={this.state.dateTime}
           iconPosition='left'
@@ -196,6 +197,7 @@ class DateTimeForm extends React.Component<any, any> {
           autoComplete='off'
           onChange={this.handleChange}
         />
+        <br />
         <MonthRangeInput
           placeholder='MonthRange'
           dateFormat='YYYY-MM'
@@ -242,6 +244,8 @@ class DateTimeFormInline extends React.Component<any, any> {
           value={this.state.date}
           name='date'
           onChange={this.handleChange}
+          marked={[new Date()]}
+          markColor='orange'
         />
         <br />
         <TimeInput
