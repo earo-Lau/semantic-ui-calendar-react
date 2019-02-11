@@ -8,6 +8,7 @@ import {
   getInitializer,
   parseDatesRange,
   parseValue,
+  parseArrayOrValue,
 } from './parse';
 
 import DatesRangePicker, {
@@ -18,6 +19,7 @@ import BaseInput, {
   BaseInputState,
   DateRelatedProps,
   MinMaxValueProps,
+  MarkedValuesProps,
 } from './BaseInput';
 
 const DATES_SEPARATOR = ' - ';
@@ -25,6 +27,7 @@ const DATES_SEPARATOR = ' - ';
 export type DatesRangeInputProps =
   & BaseInputProps
   & DateRelatedProps
+  & MarkedValuesProps
   & MinMaxValueProps;
 
 export interface DatesRangeInputOnChangeData extends DatesRangeInputProps {
@@ -84,6 +87,13 @@ class DatesRangeInput extends BaseInput<DatesRangeInputProps, BaseInputState> {
     duration: PropTypes.number,
     /** Named animation event to used. Must be defined in CSS. */
     animation: PropTypes.string,
+    marked: PropTypes.oneOfType([
+      CustomPropTypes.momentObj,
+      CustomPropTypes.dateObject,
+      PropTypes.arrayOf(CustomPropTypes.momentObj),
+      PropTypes.arrayOf(CustomPropTypes.dateObject),
+    ]),
+    markColor: PropTypes.string,
   };
 
   constructor(props) {
@@ -102,6 +112,8 @@ class DatesRangeInput extends BaseInput<DatesRangeInputProps, BaseInputState> {
       maxDate,
       minDate,
       closable,
+      marked,
+      markColor,
       ...rest
     } = this.props;
 
@@ -109,6 +121,7 @@ class DatesRangeInput extends BaseInput<DatesRangeInputProps, BaseInputState> {
       start,
       end,
     } = parseDatesRange(value, dateFormat);
+    const markedParsed = parseArrayOrValue(marked, dateFormat);
 
     return (
       <InputView
@@ -132,6 +145,8 @@ class DatesRangeInput extends BaseInput<DatesRangeInputProps, BaseInputState> {
             initializeWith={getInitializer({ initialDate, dateFormat })}
             start={start}
             end={end}
+            marked={markedParsed}
+            markColor={markColor}
             minDate={parseValue(minDate, dateFormat)}
             maxDate={parseValue(maxDate, dateFormat)} />)
         }
